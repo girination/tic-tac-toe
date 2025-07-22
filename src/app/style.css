@@ -73,6 +73,13 @@ h1 {
   background-color: #444;
 }
 
+/* Winning square style */
+.square.winning {
+  background-color: #a2f5a2; /* light green */
+  border-color: #32cd32;
+  color: #000;
+}
+
 /* Buttons */
 .restart, .toggle {
   margin-top: 20px;

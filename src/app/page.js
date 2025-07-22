@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Confetti from "react-confetti"; // 🎉 Import Confetti
-import { useWindowSize } from "@react-hook/window-size"; // Optional helper for dynamic sizing
+import Confetti from "react-confetti";
+import { useWindowSize } from "@react-hook/window-size";
 import Board from "../components/Board";
 
 export default function Home() {
@@ -10,26 +10,23 @@ export default function Home() {
   const [isXNext, setIsXNext] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [width, height] = useWindowSize();
 
-  const winner = calculateWinner(squares);
+  const { winner, line: winningLine } = calculateWinner(squares);
   const isDraw = !winner && squares.every(Boolean);
-  const [width, height] = useWindowSize(); // For confetti full screen
 
   useEffect(() => {
     if (winner) {
       setShowConfetti(true);
-      // Stop confetti after 4 seconds
-      const timeout = setTimeout(() => setShowConfetti(false), 7000);
+      const timeout = setTimeout(() => setShowConfetti(false), 4000);
       return () => clearTimeout(timeout);
     }
   }, [winner]);
 
   const handleClick = (i) => {
     if (squares[i] || winner) return;
-
     const next = [...squares];
     next[i] = isXNext ? "X" : "O";
-
     setSquares(next);
     setIsXNext(!isXNext);
   };
@@ -37,7 +34,7 @@ export default function Home() {
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setIsXNext(true);
-    setShowConfetti(false); // reset confetti
+    setShowConfetti(false);
   };
 
   const toggleDarkMode = () => {
@@ -45,29 +42,32 @@ export default function Home() {
     document.documentElement.classList.toggle("dark", !darkMode);
   };
 
-  let status = winner
+  const status = winner
     ? `Winner: ${winner}`
     : isDraw
     ? "It's a draw!"
     : `Next player: ${isXNext ? "X" : "O"}`;
 
   return (
-    <div className="game">
+    <div className={`theme ${darkMode ? "dark" : ""}`}>
       {showConfetti && <Confetti width={width} height={height} />}
-      
-      <button className="toggle" onClick={toggleDarkMode}>
-        {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
-      </button>
-
-      <h1>Tic-Tac-Toe</h1>
-      <div className="status">{status}</div>
-      <Board squares={squares} onClick={handleClick} />
-
-      {(winner || isDraw) && (
-        <button className="restart" onClick={handleRestart}>
-          Play Again
+      <div className="game">
+        <button className="toggle" onClick={toggleDarkMode}>
+          {darkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
         </button>
-      )}
+        <h1>Tic-Tac-Toe</h1>
+        <div className="status">{status}</div>
+        <Board
+          squares={squares}
+          onClick={handleClick}
+          winningLine={winningLine}
+        />
+        {(winner || isDraw) && (
+          <button className="restart" onClick={handleRestart}>
+            Play Again
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -78,12 +78,10 @@ function calculateWinner(squares) {
     [0, 3, 6], [1, 4, 7], [2, 5, 8],
     [0, 4, 8], [2, 4, 6],
   ];
-
   for (const [a, b, c] of lines) {
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], line: [a, b, c] };
     }
   }
-
-  return null;
+  return { winner: null, line: [] };
 }
