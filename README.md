@@ -12,7 +12,7 @@ A modern, fully interactive Tic-Tac-Toe game built with **Next.js** and **React*
 
 ## 🖥️ Preview
 
-![Tic-Tac-Toe Screenshot](./tic.png)
+![Tic-Tac-Toe Screenshot](tic.png)
 
 ---
 
