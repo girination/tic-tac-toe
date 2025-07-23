@@ -12,7 +12,7 @@ A modern, fully interactive Tic-Tac-Toe game built with **Next.js** and **React*
 
 ## 🖥️ Preview
 
-![Tic-Tac-Toe Screenshot](tic.png)
+![Tic-Tac-Toe Screenshot](./tic.png)
 
 ---
 
@@ -25,23 +25,6 @@ A modern, fully interactive Tic-Tac-Toe game built with **Next.js** and **React*
 - **Responsive UI**: Grid-based board layout
 
 ---
-
-## 📁 Folder Structure
-
-```
-tic-tac-toe/
-├── app/
-│   └── page.js               # Main game logic
-├── components/
-│   ├── Board.js              # Board layout
-│   └── Square.js             # Individual square component
-├── styles/
-│   └── globals.css           # Global styles
-├── public/
-│   └── screenshot.png        # (Optional) Screenshot for README
-├── package.json
-└── README.md
-```
 
 ---
 
@@ -97,28 +80,18 @@ npm install react-confetti @react-hook/window-size
 
 ---
 
-## 📸 Screenshots
-
-> You can add a screenshot in the `/public` folder and reference it above if desired.
-
----
 
 ## 🤝 Contributing
 
-Pull requests are welcome. For major changes, open an issue first to discuss what you’d like to change or add (e.g., AI opponent, score tracking, multiplayer).
+Pull requests are welcome. For major changes, open an issue first to discuss what you’d like to change or add
 
 ---
 
-## 📄 License
-
-This project is open-source and free to use under the [MIT License](https://choosealicense.com/licenses/mit/).
-
----
 
 ## 👨‍💻 Author
 
-Developed by **[Your Name]**  
-📧 Contact: your.email@example.com  
-🔗 GitHub: [@your-username](https://github.com/your-username)
+Developed by **[Clinton Giri]**  
+📧 Contact: Bamegirry@gmail.com
+🔗 GitHub: [@girination](https://github.com/girination)
 
 ---
